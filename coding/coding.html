@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Coding Projects | Arianna “Ari” Kelley-Lomax</title>
+    <title>Coding Projects | Arianna “Ari” Lomax-Murphy</title>
     <meta
       name="description"
-      content="Selected coding projects by Arianna 'Ari' Kelley-Lomax — front-end demos, interactive components, and verified badges/certifications."
+      content="Selected coding projects by Arianna 'Ari' Lomax-Murphy — front-end demos, interactive components, and verified badges/certifications."
     />
-    <meta name="author" content="Arianna 'Ari' Kelley-Lomax" />
+    <meta name="author" content="Arianna 'Ari' Lomax-Murphy" />
 
     <link rel="icon" href="../img/akl-icon.svg" />
     <link rel="preload" as="image" href="img/writer-background.svg" />
@@ -34,8 +34,10 @@
     <header class="site-header" role="banner">
       <div class="container header-row">
         <a class="brand" href="../index.html" aria-label="Go to homepage">
-          <span class="brand-name">Arianna "Ari" Kelley-Lomax</span>
-          <span class="brand-tag">| Writing • Editing • Communication</span>
+          <span class="brand-name">Arianna "Ari" Lomax-Murphy</span>
+          <span class="brand-tag"
+            >Communication • Media • Writing • Development</span
+          >
         </a>
         <nav class="site-nav" aria-label="Primary">
           <button class="nav-toggle" aria-controls="menu" aria-expanded="false">
@@ -83,7 +85,7 @@
             <!-- RPS modal on homepage -->
             <article class="card">
               <img
-                src="../img/rps.svg"
+                src="../img/thumb/thumb-rps.png"
                 alt="Rock • Paper • Scissors modal demo thumbnail"
               />
               <div class="card-body">
@@ -414,7 +416,7 @@ function oncePerSession(key, fn){
     <!-- Footer -->
     <footer class="site-footer" role="contentinfo">
       <div class="container footer-row">
-        <small>© 2025 Arianna "Ari" Kelley-Lomax. All rights reserved.</small
+        <small>© 2026 Arianna "Ari" Lomax-Murphy. All rights reserved.</small
         ><br />
         <span id="quote-rotator" class="footer-quote" aria-live="polite"></span
         ><br />
@@ -457,8 +459,8 @@ function oncePerSession(key, fn){
             q && q.text
               ? `"${q.text}" — ${q.by}`
               : q && q.by
-              ? `— ${q.by}`
-              : "";
+                ? `— ${q.by}`
+                : "";
           i = (i + 1) % quotes.length;
         }
         render();
