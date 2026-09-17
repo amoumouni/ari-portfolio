@@ -108,17 +108,24 @@ a:hover {
 }
 
 /* Brand text in GOLD on black header */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
 .brand-name {
   font-weight: 700;
   font-size: 1.125rem;
-  color: var(--color-primary); /* gold */
+  color: var(--color-primary);
 }
 
 .brand-tag {
-  display: block;
+  display: inline;
   font-size: 0.875rem;
-  color: var(--color-primary); /* gold */
-  opacity: 1; /* make it fully bright instead of faded */
+  color: var(--color-primary);
+  opacity: 1;
 }
 
 /* Hover effect for brand text */
