@@ -274,47 +274,37 @@ a:hover {
 /* Trim the transparent margins built into the three overview thumbnails. */
 .exercise-thumbnail {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 
-  display: ex;
+  display: flex;
   justify-content: center;
   align-items: center;
 
-  height: 220px;
+  height: auto;
+  padding: 1.5rem 0;
 }
 
 .exercise-thumbnail-image {
   display: block;
-  width: auto !important;
-  height: 260px !important;
+  width: 320px !important;
+  height: auto !important;
   max-width: 90%;
   object-fit: contain;
   margin: 0 auto;
 }
 
-.exercise-thumbnail--css {
+.exercise-thumbnail--css / --js / --recipe {
   --crop-left: 198;
   --crop-top: 217;
   --crop-width: 760;
   --crop-height: 936;
 }
-.exercise-thumbnail--recipe {
-  --crop-left: 205;
-  --crop-top: 230;
-  --crop-width: 740;
-  --crop-height: 950;
-}
-.exercise-thumbnail--js {
-  --crop-left: 184;
-  --crop-top: 223;
-  --crop-width: 784;
-  --crop-height: 958;
-}
-.card h3 {
+
+.card-body {
   margin-bottom: 0.35rem;
   font-family: "Montserrat", sans-serif;
 }
-.card .more {
+s .card .more {
   display: inline-block;
   margin-top: 0.35rem;
   font-weight: 600;
