@@ -290,7 +290,7 @@ a:hover {
   height: auto !important;
   max-width: 90%;
   object-fit: contain;
-  margin: 0 auto;
+  margin: 1.25rem auto 0;
 }
 
 .exercise-thumbnail--css / --js / --recipe {
@@ -303,6 +303,7 @@ a:hover {
 .card-body {
   margin-bottom: 0.35rem;
   font-family: "Montserrat", sans-serif;
+  padding: 1rem;
 }
 s .card .more {
   display: inline-block;
