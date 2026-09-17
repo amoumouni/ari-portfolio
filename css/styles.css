@@ -249,7 +249,7 @@ a:hover {
 }
 
 /* =========================================
-   5) Cards (Projects) — left as you liked
+   5) Cards (Projects) 
    ========================================= */
 .card-grid {
   display: grid;
@@ -276,21 +276,20 @@ a:hover {
   position: relative;
   overflow: hidden;
 
-  display: flex;
+  display: ex;
   justify-content: center;
   align-items: center;
 
   height: 220px;
 }
 
-.exercise-thumbnail img {
-  position: static;
-
-  width: auto;
-  height: 200px;
+.exercise-card-image {
+  display: block;
+  width: auto !important;
+  height: 260px !important;
   max-width: 90%;
-
   object-fit: contain;
+  margin: 0 auto;
 }
 
 .exercise-thumbnail--css {
