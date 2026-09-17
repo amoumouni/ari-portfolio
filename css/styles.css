@@ -266,6 +266,37 @@ a:hover {
 .card-body {
   padding: 1rem;
 }
+/* Trim the transparent margins built into the three overview thumbnails. */
+.exercise-thumbnail {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--crop-width) / var(--crop-height);
+}
+.exercise-thumbnail img {
+  position: absolute;
+  max-width: none;
+  width: calc(1149 / var(--crop-width) * 100%);
+  left: calc(-1 * var(--crop-left) / var(--crop-width) * 100%);
+  top: calc(-1 * var(--crop-top) / var(--crop-height) * 100%);
+}
+.exercise-thumbnail--css {
+  --crop-left: 198;
+  --crop-top: 217;
+  --crop-width: 760;
+  --crop-height: 936;
+}
+.exercise-thumbnail--recipe {
+  --crop-left: 205;
+  --crop-top: 230;
+  --crop-width: 740;
+  --crop-height: 950;
+}
+.exercise-thumbnail--js {
+  --crop-left: 184;
+  --crop-top: 223;
+  --crop-width: 784;
+  --crop-height: 958;
+}
 .card h3 {
   margin-bottom: 0.35rem;
   font-family: "Montserrat", sans-serif;
