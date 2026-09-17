@@ -125,9 +125,12 @@ a:hover {
 .brand-name:hover,
 .brand-tag:hover {
   color: #f5d76e; /* lighter gold on hover */
-  text-shadow: 0 0 6px rgba(212, 175, 55, 0.75),
+  text-shadow:
+    0 0 6px rgba(212, 175, 55, 0.75),
     0 0 12px rgba(212, 175, 55, 0.5);
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
 }
 
 .site-nav .nav-list {
@@ -226,7 +229,9 @@ a:hover {
   background: var(--color-primary);
   color: var(--color-text-dark);
   font-weight: 600;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
   position: center;
 }
 .btn:hover {
@@ -270,15 +275,24 @@ a:hover {
 .exercise-thumbnail {
   position: relative;
   overflow: hidden;
-  aspect-ratio: var(--crop-width) / var(--crop-height);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 220px;
 }
+
 .exercise-thumbnail img {
-  position: absolute;
-  max-width: none;
-  width: calc(1149 / var(--crop-width) * 100%);
-  left: calc(-1 * var(--crop-left) / var(--crop-width) * 100%);
-  top: calc(-1 * var(--crop-top) / var(--crop-height) * 100%);
+  position: static;
+
+  width: auto;
+  height: 200px;
+  max-width: 90%;
+
+  object-fit: contain;
 }
+
 .exercise-thumbnail--css {
   --crop-left: 198;
   --crop-top: 217;
@@ -499,7 +513,9 @@ ul {
   overflow: hidden;
   transform: translateY(20px);
   opacity: 0;
-  transition: transform 0.35s ease, opacity 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease;
 }
 .rps-modal.show .rps-dialog {
   transform: translateY(0);
