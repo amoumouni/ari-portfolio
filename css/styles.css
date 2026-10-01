@@ -238,7 +238,6 @@ a:hover {
   transition:
     background 0.2s ease,
     color 0.2s ease;
-  position: center;
 }
 .btn:hover {
   background: var(--color-secondary); /* deep blue hover */
@@ -299,7 +298,7 @@ a:hover {
   margin: 1.25rem auto 0;
 }
 
-.exercise-thumbnail--css / --js / --recipe {
+.exercise-thumbnail--css .exercise-thumbnail--js .exercise-thumbnail--recipe {
   --crop-left: 198;
   --crop-top: 217;
   --crop-width: 760;
@@ -336,7 +335,7 @@ a:hover {
   font-family: "Montserrat", sans-serif;
   padding: 1rem;
 }
-s .card .more {
+.card .more {
   display: inline-block;
   margin-top: 0.35rem;
   font-weight: 600;
@@ -415,56 +414,318 @@ s .card .more {
 /* =========================================
    8) Responsive
    ========================================= */
+
 @media (max-width: 992px) {
   .card-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
   .skill-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
+/* ==========================
+   MOBILE
+   ========================== */
 @media (max-width: 768px) {
-  .header-row {
-    flex-direction: column;
-    gap: 0.75rem;
-    text-align: center;
-  }
-  .nav-toggle {
-    display: inline-block;
+  :root {
+    --header-height: 64px;
   }
 
-  /* Collapse nav by default on mobile; your JS toggles .open */
+  .container {
+    width: 92%;
+    max-width: none;
+  }
+
+  /* ---------- Header ---------- */
+
+  .site-header {
+    position: sticky;
+    top: 0;
+  }
+
+  .header-row {
+    position: relative;
+
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0.75rem 0;
+    gap: 0.75rem;
+
+    text-align: left;
+  }
+
+  .brand {
+    display: block;
+    white-space: normal;
+    line-height: 1.2;
+  }
+
+  .brand-name {
+    font-size: 0.95rem;
+  }
+
+  /* Hide long tagline from header on phones */
+  .brand-tag {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: inline-block;
+    flex-shrink: 0;
+
+    background: transparent;
+    color: #fff;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 0.45rem 0.7rem;
+    border-radius: 6px;
+
+    cursor: pointer;
+  }
+
   .site-nav .nav-list {
     display: none;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+
     flex-direction: column;
-    gap: 10px;
+    gap: 0;
+
+    padding: 0.5rem 0;
+
+    background: var(--color-accent);
+
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
   }
+
   .site-nav .nav-list.open {
     display: flex;
   }
 
-  .hero-grid {
-    grid-template-columns: 1fr;
+  .site-nav .nav-list li {
+    width: 100%;
+    padding: 0;
   }
+
+  .site-nav .nav-list a {
+    display: block;
+    width: 100%;
+
+    padding: 0.75rem 1rem;
+
+    text-align: center;
+  }
+
+  /* ---------- Background ---------- */
+
+  .bg-fixed {
+    top: var(--header-height);
+
+    width: 100vw !important;
+    height: calc(100dvh - var(--header-height)) !important;
+
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  body::after {
+    top: var(--header-height);
+    height: calc(100dvh - var(--header-height));
+  }
+
+  /* ---------- Hero ---------- */
+
+  .hero {
+    padding: 1.5rem 0 0;
+  }
+
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+
+    gap: 1.5rem;
+  }
+
+  .hero-copy {
+    width: 100%;
+  }
+
+  .hero .panel {
+    width: 100%;
+
+    padding: 1.25rem !important;
+
+    border-radius: 10px;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+    line-height: 1.15;
+
+    margin-bottom: 0.55rem;
+  }
+
+  .hero h2 {
+    font-size: 1.3rem;
+    line-height: 1.25;
+
+    color: var(--color-primary);
+
+    margin-bottom: 0.45rem;
+  }
+
+  .hero .tagline {
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .hero-media {
+    width: 100%;
+
+    margin: 0;
+  }
+
+  .hero-media img {
+    width: 100%;
+    height: auto;
+
+    max-height: 520px;
+
+    object-fit: contain;
+  }
+
+  .hero-media figcaption {
+    margin-top: 0.5rem;
+
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  /* ---------- Buttons ---------- */
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 0.65rem;
+
+    margin-top: 0.75rem;
+  }
+
+  .cta-row .btn {
+    flex: 1 1 150px;
+
+    text-align: center;
+  }
+
+  /* ---------- Sections ---------- */
+
+  .section {
+    padding: 2rem 0;
+  }
+
+  .panel,
+  .section-box {
+    border-radius: 10px;
+  }
+
+  /* ---------- Skills ---------- */
+
+  .skill-grid {
+    grid-template-columns: 1fr;
+
+    gap: 1rem;
+
+    padding-left: 1.25rem;
+  }
+
+  /* ---------- Featured Work ---------- */
+
+  .card-grid {
+    grid-template-columns: 1fr;
+
+    gap: 1.25rem;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .card img {
+    width: 100%;
+    height: auto;
+
+    max-height: none;
+
+    object-fit: contain;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  /* ---------- Resume ---------- */
+
   .resume-head {
     flex-direction: column;
     align-items: flex-start;
   }
+
+  /* ---------- Contact ---------- */
+
+  .contact-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 1.25rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
+/* Extra-small phones */
 @media (max-width: 480px) {
-  h1 {
-    font-size: 1.5rem;
+  .container {
+    width: 94%;
   }
-  .site-nav .nav-list {
-    gap: 5px;
+
+  .brand-name {
+    font-size: 0.88rem;
   }
+
+  .hero h1 {
+    font-size: 1.55rem;
+  }
+
+  .hero h2 {
+    font-size: 1.15rem;
+  }
+
   .section {
-    padding: 2.25rem 0;
+    padding: 1.75rem 0;
   }
-  .card-grid {
-    grid-template-columns: 1fr;
+
+  .cta-row {
+    flex-direction: column;
+  }
+
+  .cta-row .btn {
+    width: 100%;
+    flex: none;
   }
 }
 
