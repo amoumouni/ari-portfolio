@@ -9,6 +9,7 @@
 
   --color-text-light: #ffffff; /* White text */
   --color-text-dark: #111111; /* Dark text (rare) */
+  --header-height: 50px;
 }
 
 * {
@@ -28,13 +29,19 @@ body {
 
 .bg-fixed {
   position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover; /* fill, no distortion */
+  top: var(--header-height);
+  left: 0;
+  width: 100vw !important;
+  max-width: none !important;
+  height: calc(100vh - var(--header-height)) !important;
+  max-height: none !important;
+
+  /* Full image + full width + full height */
+  object-fit: fill;
+  object-position: center;
   z-index: -2;
   pointer-events: none;
-  transform: translateZ(0); /* nudge GPU; can improve sharpness */
+  margin: 0 !important;
 }
 
 body {
@@ -47,9 +54,14 @@ body {
 body::after {
   content: "";
   position: fixed;
-  inset: 0;
-  background: linear-gradient(rgba(15, 17, 22, 0.3), rgba(15, 17, 22, 0.3));
-  z-index: -1; /* overlay above image, below content */
+
+  top: var(--header-height);
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - var(--header-height));
+  background: rgba(15, 17, 22, 0.18);
+
+  z-index: -1;
   pointer-events: none;
 }
 
@@ -99,6 +111,11 @@ a:hover {
 .site-header {
   background: var(--color-accent);
   color: var(--color-text-light);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* above everything */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 .header-row {
   display: flex;
@@ -109,9 +126,7 @@ a:hover {
 
 /* Brand text in GOLD on black header */
 .brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  display: inline;
   white-space: nowrap;
 }
 
@@ -208,22 +223,6 @@ a:hover {
 .hero .section-box {
   background: #0f1729;
   border-color: transparent;
-}
-
-.hero-bg {
-  position: fixed; /* stays in place while scrolling */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -1; /* pushes it behind all page content */
-}
-
-.hero-bg svg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* scales it nicely */
 }
 
 /* =========================================
@@ -615,17 +614,6 @@ ul {
 
 .contact-form {
   color: #ffd700;
-}
-
-/* === Global SVG background applied via CSS only === */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: url("../img/writer-background.svg") no-repeat center center;
-  background-size: cover;
-  z-index: -2; /* sits behind everything */
-  pointer-events: none; /* don’t block clicks */
 }
 
 /* Force hero sections transparent so global background shows */
