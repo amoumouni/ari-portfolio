@@ -270,7 +270,7 @@ a:hover {
   color: #fff;
 }
 .card img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
 }
 .card-body {
@@ -415,7 +415,7 @@ a:hover {
    8) Responsive
    ========================================= */
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
   .card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -652,7 +652,6 @@ a:hover {
 
   .card-grid {
     grid-template-columns: 1fr;
-
     gap: 1.25rem;
   }
 
@@ -660,17 +659,45 @@ a:hover {
     width: 100%;
   }
 
+  /* Normal project thumbnails can use the card width */
   .card img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
-
-    max-height: none;
-
     object-fit: contain;
   }
 
   .card-body {
     padding: 1rem;
+  }
+
+  /* ---------- Coding thumbnails ---------- */
+
+  /* Coding overview images stay SMALL */
+  #css-exercises .card img,
+  #js-exercises .card img,
+  .exercise-card img,
+  .exercise-thumbnail-image {
+    display: block;
+
+    width: 240px !important;
+    max-width: 78% !important;
+    height: auto !important;
+    max-height: 300px !important;
+
+    object-fit: contain !important;
+
+    margin: 1rem auto !important;
+  }
+
+  .exercise-thumbnail {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+    overflow: hidden;
   }
 
   /* ---------- Resume ---------- */
@@ -881,4 +908,39 @@ ul {
 .page-hero,
 .page-hero::before {
   background: transparent !important;
+}
+
+/* =========================================
+   CODING PAGE — THUMBNAIL SIZE FIX
+   ========================================= */
+
+/* Keep coding cards full-size, but NOT their images */
+#css-exercises .card img,
+#js-exercises .card img,
+#recipe-exercises .card img,
+.exercise-card img,
+.exercise-thumbnail-image {
+  display: block;
+
+  width: 280px !important;
+  max-width: 85% !important;
+  height: auto !important;
+  max-height: 340px !important;
+
+  object-fit: contain !important;
+
+  margin: 1rem auto !important;
+}
+
+/* Give the thumbnail breathing room instead of stretching */
+.exercise-thumbnail {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 1rem;
+  overflow: hidden;
 }

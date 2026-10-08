@@ -1,109 +1,258 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>JS Exercise 2 | Arianna “Ari” Kelley-Lomax</title>
+    <title>Function 1 — Add or Subtract | Arianna Lomax-Murphy</title>
+
     <meta
       name="description"
-      content="JavaScript Exercise 2 — Multiply two numbers. Part of Arianna 'Ari' Kelley-Lomax's coding portfolio."
+      content="JavaScript Function 1 — Add 7 to integers below 10 or subtract 3 from integers 10 and above. A coding project by Arianna Lomax-Murphy."
     />
 
-    <link rel="icon" href="../../img/icons/akl-icon.svg" />
-    <link rel="preload" as="image" href="img/writer-background.svg" />
+    <!-- ALM Branding -->
+    <link rel="icon" href="../../img/icons/alm-icon.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Source+Serif+Pro:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Background -->
+    <link rel="preload" as="image" href="../../img/ari-background.png" />
+
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="../../css/styles.css" />
   </head>
 
   <body>
+    <!-- Background Image -->
     <img
-      src="../img/writer-background.svg"
+      src="../../img/ari-background.png"
       alt=""
       class="bg-fixed"
       aria-hidden="true"
     />
 
-    <a class="skip-link" href="#main">Skip to content</a>
+    <!-- Accessibility -->
+    <a class="skip-link" href="#main"> Skip to content </a>
 
-    <!-- Header -->
+    <!-- ==========================
+         HEADER
+         ========================== -->
+
     <header class="site-header" role="banner">
       <div class="container header-row">
-        <a class="brand" href="../../index.html">
-          <span class="brand-name">Arianna "Ari" Kelley-Lomax</span>
-          <span class="brand-tag">| Writing • Editing • Communication</span>
+        <a class="brand" href="../../index.html" aria-label="Go to homepage">
+          <span class="brand-name"> Arianna "Ari" Lomax-Murphy </span>
         </a>
+
+        <span class="brand-tag"
+          >Communication • Media • Writing • Development</span
+        >
+
         <nav class="site-nav" aria-label="Primary">
-          <ul class="nav-list">
-            <li><a href="../../index.html">Home</a></li>
-            <li><a href="../../about/about.html">About</a></li>
-            <li><a href="../../resume/resume.html">Resume</a></li>
-            <li><a href="../../projects/projects.html">Projects</a></li>
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-controls="menu"
+            aria-expanded="false"
+          >
+            Menu
+          </button>
+
+          <ul id="menu" class="nav-list">
             <li>
-              <a href="../coding.html" aria-current="page">Coding</a>
+              <a href="../../index.html"> Home </a>
             </li>
-            <li><a href="../../contact/contact.html">Contact</a></li>
+
+            <li>
+              <a href="../../about/about.html"> About </a>
+            </li>
+
+            <li>
+              <a href="../../resume/resume.html"> Resume </a>
+            </li>
+
+            <li>
+              <a href="../../projects/projects.html"> Projects </a>
+            </li>
+
+            <li>
+              <a href="../coding.html" aria-current="page"> Coding </a>
+            </li>
+
+            <li>
+              <a href="../../contact/contact.html"> Contact </a>
+            </li>
           </ul>
         </nav>
       </div>
     </header>
 
-    <!-- Main -->
+    <!-- ==========================
+         MAIN CONTENT
+         ========================== -->
+
     <main id="main" class="section">
       <div class="container">
-        <div class="panel">
-          <h1>JavaScript Exercise 2: Multiply</h1>
-          <p>This function takes two numbers and multiplies them together.</p>
-
-          <form id="multiplyForm">
-            <label>
-              First number:
-              <input type="number" id="num1" required />
-            </label>
-            <br />
-            <label>
-              Second number:
-              <input type="number" id="num2" required />
-            </label>
-            <br />
-            <button class="btn" type="submit">Calculate</button>
-          </form>
-
-          <div id="output" class="panel" style="margin-top: 1rem"></div>
+        <div class="panel panel--midnight">
+          <h1>Function 1 — Add or Subtract</h1>
 
           <p>
-            <a class="more" href="../coding.html">← Back to Coding Projects</a>
+            This function takes an integer and performs one of two operations:
+            adds 7 if the integer is less than 10, or subtracts 3 if the integer
+            is 10 or greater.
+          </p>
+
+          <!-- Input Form -->
+          <form id="add-subtract-form">
+            <label for="integer">
+              <span>Enter an Integer:</span>
+            </label>
+
+            <br />
+
+            <input
+              type="number"
+              id="integer"
+              name="integer"
+              step="1"
+              required
+            />
+
+            <br /><br />
+
+            <button type="submit" class="btn">Calculate</button>
+          </form>
+
+          <!-- Output -->
+          <div
+            id="output"
+            role="status"
+            aria-live="polite"
+            style="margin-top: 1rem; font-weight: 600"
+          ></div>
+
+          <!-- Back Link -->
+          <p style="margin-top: 2rem">
+            <a class="more" href="../coding.html">
+              ← Back to Coding Projects
+            </a>
           </p>
         </div>
       </div>
     </main>
 
-    <!-- Footer -->
+    <!-- ==========================
+         FOOTER
+         ========================== -->
+
     <footer class="site-footer" role="contentinfo">
       <div class="container footer-row">
-        <small>© 2025 Arianna "Ari" Kelley-Lomax. All rights reserved.</small>
+        <small> © 2026 Arianna Lomax-Murphy. All rights reserved. </small>
+
+        <span id="quote-rotator" class="footer-quote" aria-live="off"></span>
+
+        <a href="../../privacy/privacy.html"> Privacy </a>
       </div>
     </footer>
 
-    <!-- JS -->
-    <script>
-      function multiply(a, b) {
-        return a * b;
-      }
+    <!-- ==========================
+         MOBILE NAVIGATION
+         ========================== -->
 
-      const form = document.getElementById("multiplyForm");
+    <script>
+      const navButton = document.querySelector(".nav-toggle");
+
+      const navMenu = document.getElementById("menu");
+
+      if (navButton && navMenu) {
+        navButton.addEventListener("click", function () {
+          const expanded = navButton.getAttribute("aria-expanded") === "true";
+
+          navButton.setAttribute("aria-expanded", String(!expanded));
+
+          navMenu.classList.toggle("open");
+        });
+      }
+    </script>
+
+    <!-- ==========================
+         FUNCTION 1 JAVASCRIPT
+         ========================== -->
+
+    <script src="./function1.js"></script>
+
+    <script>
+      // Connect the HTML form to Function 1
+
+      const form = document.getElementById("add-subtract-form");
+
       const output = document.getElementById("output");
 
-      form.addEventListener("submit", (e) => {
+      form.addEventListener("submit", function (e) {
         e.preventDefault();
-        const n1 = parseFloat(document.getElementById("num1").value);
-        const n2 = parseFloat(document.getElementById("num2").value);
 
-        if (!isNaN(n1) && !isNaN(n2)) {
-          output.textContent = `Result: ${multiply(n1, n2)}`;
+        const integer = document.getElementById("integer").valueAsNumber;
+
+        // Validate integer input
+        if (!Number.isInteger(integer)) {
+          output.textContent = "Please enter a valid integer.";
+          return;
+        }
+
+        // Call original function1.js
+        const result = addOrSubtract(integer);
+
+        // Show the correct operation
+        if (integer < 10) {
+          output.textContent = `${integer} + 7 = ${result}`;
         } else {
-          output.textContent = "Please enter valid numbers.";
+          output.textContent = `${integer} − 3 = ${result}`;
         }
       });
+    </script>
+
+    <!-- ==========================
+         FOOTER QUOTE ROTATOR
+         ========================== -->
+
+    <script>
+      (function () {
+        const quotes = [
+          {
+            text: "Words are, in my not-so-humble opinion, our most inexhaustible source of magic.",
+            by: "J.K. Rowling",
+          },
+          {
+            text: "A writer should be joyous, an optimist … a believer in the perfectibility of man.",
+            by: "John Cheever",
+          },
+        ];
+
+        const quoteElement = document.getElementById("quote-rotator");
+
+        if (!quoteElement) return;
+
+        let index = 0;
+
+        function renderQuote() {
+          const quote = quotes[index];
+
+          quoteElement.textContent = `"${quote.text}" — ${quote.by}`;
+
+          index = (index + 1) % quotes.length;
+        }
+
+        renderQuote();
+
+        setInterval(renderQuote, 10000);
+      })();
     </script>
   </body>
 </html>
