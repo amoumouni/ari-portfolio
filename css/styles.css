@@ -735,6 +735,15 @@ a:hover {
 
     object-fit: contain;
   }
+  /* Projects — Responsive Thumbnail Sizing */
+
+  section[aria-labelledby="proj-title"] .card > img {
+    display: block;
+    width: 100%;
+    height: clamp(280px, 88vw, 420px);
+    object-fit: contain;
+    object-position: center;
+  }
 
   .card-body {
     padding: 1rem;
@@ -948,4 +957,23 @@ ul {
 .page-hero,
 .page-hero::before {
   background: transparent !important;
+}
+
+/* ==========================================
+   PROJECTS — LARGER MOBILE / SMALL TABLET
+   480px–768px
+   ========================================== */
+
+@media (min-width: 480px) and (max-width: 768px) {
+  /* Display two project cards per row */
+  section[aria-labelledby="proj-title"] .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Maintain consistent thumbnail heights */
+  section[aria-labelledby="proj-title"] .card > img {
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+  }
 }
