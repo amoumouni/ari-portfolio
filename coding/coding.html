@@ -20,7 +20,7 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body class="coding-page">
     <img
       src="../img/ari-background.png"
       alt=""
@@ -485,43 +485,237 @@ function oncePerSession(key, fn){
     </script>
 
     <!-- Toggle JS & CSS exercise grids -->
+    <!-- ==========================================
+    TABLET EXERCISE GALLERY
+    ========================================== -->
+
+    <dialog
+      id="exercise-gallery-dialog"
+      class="exercise-gallery-dialog"
+      aria-labelledby="exercise-gallery-title"
+    >
+      <div class="exercise-gallery-header">
+        <h2 id="exercise-gallery-title">Exercises</h2>
+
+        <button
+          type="button"
+          id="exercise-gallery-close"
+          class="exercise-gallery-close"
+          aria-label="Close exercise gallery"
+          autofocus
+        >
+          ✕ Close
+        </button>
+      </div>
+
+      <div id="exercise-gallery-content" class="exercise-gallery-grid"></div>
+    </dialog>
     <script>
-      // one handler for any "toggle-grid" link
       document.addEventListener("DOMContentLoaded", () => {
+        /* ==========================================
+           CODING — RESPONSIVE EXERCISE GALLERIES
+           ========================================== */
+
         const links = document.querySelectorAll(".toggle-grid[data-target]");
-        if (!links.length) return;
+
+        const dialog = document.getElementById("exercise-gallery-dialog");
+
+        const galleryTitle = document.getElementById("exercise-gallery-title");
+
+        const galleryContent = document.getElementById(
+          "exercise-gallery-content",
+        );
+
+        const closeButton = document.getElementById("exercise-gallery-close");
+
+        const tabletView = window.matchMedia(
+          "(min-width: 640px) and (max-width: 992px)",
+        );
+
+        const originalPositions = new Map();
+
+        let activeGallery = null;
+
+        /* ==========================================
+           UPDATE BUTTON TEXT AND ACCESSIBILITY
+           ========================================== */
+
+        function updateButton(link, expanded) {
+          link.setAttribute("aria-expanded", String(expanded));
+
+          link.textContent = expanded
+            ? "Hide Exercises ↑"
+            : "Browse Exercises ↓";
+        }
+
+        /* ==========================================
+           NORMAL MOBILE AND DESKTOP EXPANSION
+           ========================================== */
+
+        function toggleInline(grid, link) {
+          const isHidden =
+            grid.style.display === "none" || grid.style.display === "";
+
+          grid.style.display = isHidden ? "grid" : "none";
+
+          updateButton(link, isHidden);
+        }
+
+        /* ==========================================
+           OPEN TABLET GALLERY
+           ========================================== */
+
+        function openGallery(grid, link) {
+          if (
+            !dialog ||
+            !galleryContent ||
+            !galleryTitle ||
+            typeof dialog.showModal !== "function"
+          ) {
+            toggleInline(grid, link);
+            return;
+          }
+
+          if (dialog.open) return;
+
+          const overviewCard = link.closest("article");
+
+          const title =
+            overviewCard?.querySelector("h3")?.textContent?.trim() ||
+            "Exercises";
+
+          galleryTitle.textContent = title;
+
+          activeGallery = {
+            grid,
+            link,
+          };
+
+          /* Move existing exercises into the gallery */
+
+          galleryContent.replaceChildren(grid);
+
+          grid.style.display = "grid";
+
+          updateButton(link, true);
+
+          /* Open modal */
+
+          dialog.showModal();
+
+          closeButton?.focus();
+        }
+
+        /* ==========================================
+           RESTORE EXERCISES AFTER CLOSING
+           ========================================== */
+
+        function restoreGallery() {
+          if (!activeGallery) return;
+
+          const { grid, link } = activeGallery;
+
+          const placeholder = originalPositions.get(grid);
+
+          /* Return exercises to their original HTML position */
+
+          if (placeholder?.parentNode) {
+            placeholder.after(grid);
+          }
+
+          grid.style.display = "none";
+
+          updateButton(link, false);
+
+          galleryContent.replaceChildren();
+
+          activeGallery = null;
+
+          /* Restore keyboard focus */
+
+          if (link.isConnected) {
+            link.focus({
+              preventScroll: true,
+            });
+          }
+        }
+
+        /* ==========================================
+           INITIALIZE EXERCISE BUTTONS
+           ========================================== */
 
         links.forEach((link) => {
-          const targetSel = link.getAttribute("data-target");
-          const grid = document.querySelector(targetSel);
+          const targetSelector = link.getAttribute("data-target");
+
+          const grid = document.querySelector(targetSelector);
+
           if (!grid) return;
 
-          // start hidden
+          /* Remember original exercise position */
+
+          const placeholder = document.createComment(
+            "Original exercise grid position",
+          );
+
+          grid.parentNode.insertBefore(placeholder, grid);
+
+          originalPositions.set(grid, placeholder);
+
+          /* Start hidden */
+
           grid.style.display = "none";
-          link.setAttribute("aria-expanded", "false");
-          link.textContent = "Browse Exercises ↓";
 
-          function show() {
-            grid.style.display = "grid";
-            link.textContent = "Hide Exercises ↑";
-            link.setAttribute("aria-expanded", "true");
-            // optional: scroll into view
-            // grid.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
+          link.setAttribute("aria-controls", grid.id);
 
-          function hide() {
-            grid.style.display = "none";
-            link.textContent = "Browse Exercises ↓";
-            link.setAttribute("aria-expanded", "false");
-          }
+          updateButton(link, false);
 
-          link.addEventListener("click", (e) => {
-            e.preventDefault();
-            grid.style.display === "none" || grid.style.display === ""
-              ? show()
-              : hide();
+          /* Handle Browse Exercises */
+
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            if (tabletView.matches) {
+              openGallery(grid, link);
+            } else {
+              toggleInline(grid, link);
+            }
           });
         });
+
+        /* ==========================================
+           CLOSE BUTTON
+           ========================================== */
+
+        closeButton?.addEventListener("click", () => {
+          if (dialog?.open) {
+            dialog.close();
+          }
+        });
+
+        /* ==========================================
+           RESTORE CONTENT WHEN DIALOG CLOSES
+           Includes Escape key closing
+           ========================================== */
+
+        dialog?.addEventListener("close", () => {
+          restoreGallery();
+        });
+
+        /* ==========================================
+           HANDLE SCREEN SIZE CHANGES
+           ========================================== */
+
+        function handleViewportChange() {
+          if (dialog?.open && !tabletView.matches) {
+            dialog.close();
+          }
+        }
+
+        if (tabletView.addEventListener) {
+          tabletView.addEventListener("change", handleViewportChange);
+        } else {
+          tabletView.addListener(handleViewportChange);
+        }
       });
     </script>
   </body>

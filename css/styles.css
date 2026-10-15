@@ -106,7 +106,9 @@ a:hover {
 
 /* =========================================
    1) Header & Navigation
-   - BG black; brand text deep blue
+   - Opaque black header
+   - Gold branding and tagline
+   - Responsive navigation
    ========================================= */
 .site-header {
   background: var(--color-accent);
@@ -275,8 +277,10 @@ a:hover {
 }
 .card-body {
   padding: 1rem;
-}
-/* Trim the transparent margins built into the three overview thumbnails. */
+  margin-bottom: 0.35rem;
+  font-family: "Montserrat", sans-serif;
+} /* Trim the transparent margins built into the three overview thumbnails. */
+
 .exercise-thumbnail {
   position: relative;
   overflow: visible;
@@ -298,13 +302,6 @@ a:hover {
   margin: 1.25rem auto 0;
 }
 
-.exercise-thumbnail--css .exercise-thumbnail--js .exercise-thumbnail--recipe {
-  --crop-left: 198;
-  --crop-top: 217;
-  --crop-width: 760;
-  --crop-height: 936;
-}
-
 .exercise-card {
   background: #0f1729;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -316,25 +313,10 @@ a:hover {
 }
 
 .exercise-card .exercise-thumbnail-image {
-  display: block;
-
-  width: 320px !important;
-  height: auto !important;
   max-width: none;
-
-  object-fit: contain;
   margin: 0 auto;
 }
 
-.exercise-card .card-body {
-  padding: 1rem;
-}
-
-.card-body {
-  margin-bottom: 0.35rem;
-  font-family: "Montserrat", sans-serif;
-  padding: 1rem;
-}
 .card .more {
   display: inline-block;
   margin-top: 0.35rem;
@@ -446,7 +428,7 @@ a:hover {
     display: block;
     min-width: 0;
     text-align: center;
-    white-space: nowrap;
+    white-space: normal;
     font-size: 0.75rem;
     line-height: 1.2;
     color: var(--color-primary);
@@ -529,7 +511,7 @@ a:hover {
     font-size: 0.95rem;
   }
 
-  /* Hide long tagline from header on phones */
+  /* Display a compact, centered tagline on mobile */
   .brand-tag {
     display: block;
     min-width: 0;
@@ -745,10 +727,6 @@ a:hover {
     object-position: center;
   }
 
-  .card-body {
-    padding: 1rem;
-  }
-
   /* ---------- Resume ---------- */
 
   .resume-head {
@@ -806,8 +784,8 @@ a:hover {
 }
 
 /* =========================================
-   9) Safety override (if something earlier wins)
-   Force brand text to deep blue on header
+   9) Header Brand Color Override
+   Keep the name and tagline gold
    ========================================= */
 .site-header .brand-name,
 .site-header .brand-tag {
@@ -833,16 +811,6 @@ ul {
 
 #education {
   list-style: none;
-}
-
-#js-exercises .card img {
-  max-height: 160px;
-  object-fit: contain;
-}
-
-#css-exercises .card img {
-  max-height: 160px;
-  object-fit: contain;
 }
 
 .rps-modal[aria-hidden="true"] {
@@ -890,6 +858,7 @@ ul {
   flex-wrap: wrap;
 }
 .rps-close {
+  display: none !important;
   position: absolute;
   top: 8px;
   right: 10px;
@@ -921,11 +890,6 @@ ul {
   max-height: 180px;
   overflow-y: auto;
   color: #f4f4f4;
-}
-
-/* === Hide the close X button for RPS game === */
-.rps-close {
-  display: none !important;
 }
 
 /* Ensure anything with the HTML 'hidden' attribute stays hidden */
@@ -975,5 +939,567 @@ ul {
     height: auto;
     object-fit: contain;
     object-position: center;
+  }
+}
+
+/* ==========================================
+   CODING — COMPACT MOBILE OVERVIEW THUMBNAILS
+   CSS Exercises, Recipe, JavaScript Exercises
+   ========================================== */
+
+@media (max-width: 479px) {
+  section[aria-labelledby="exercises-title"] > .container > article.card {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 1.25rem;
+  }
+
+  section[aria-labelledby="exercises-title"]
+    > .container
+    > article.card
+    > .exercise-thumbnail {
+    padding: 0;
+  }
+
+  section[aria-labelledby="exercises-title"]
+    > .container
+    > article.card
+    > .exercise-thumbnail
+    > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+/* ==========================================
+   CODING — DESKTOP OVERVIEW CARDS
+   ========================================== */
+
+@media (min-width: 769px) {
+  /* Arrange the three overview cards in one row */
+  section[aria-labelledby="exercises-title"] > .container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  /* Keep the section heading full width */
+  section[aria-labelledby="exercises-title"] > .container > h2 {
+    grid-column: 1 / -1;
+  }
+
+  /* Keep all three overview cards together when exercises expand */
+  #css-exercises {
+    order: 1;
+  }
+
+  #js-exercises {
+    order: 2;
+  }
+
+  /* Keep expandable exercise grids full width */
+  #css-exercises,
+  #js-exercises {
+    grid-column: 1 / -1;
+  }
+
+  /* Compact overview cards */
+  section[aria-labelledby="exercises-title"] > .container > article.card {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+  }
+
+  /* Remove excessive thumbnail padding */
+  section[aria-labelledby="exercises-title"]
+    > .container
+    > article.card
+    > .exercise-thumbnail {
+    padding: 0;
+  }
+
+  /* Preserve full artwork */
+  section[aria-labelledby="exercises-title"]
+    > .container
+    > article.card
+    > .exercise-thumbnail
+    > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+/* ==========================================
+   CODING — COMPACT MOBILE EXERCISE CARDS
+   ========================================== */
+
+@media (max-width: 479px) {
+  #css-exercises .exercise-card,
+  #js-exercises .exercise-card {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  #css-exercises .exercise-card .exercise-thumbnail-image,
+  #js-exercises .exercise-card .exercise-thumbnail-image {
+    width: 100% !important;
+    max-width: 100%;
+    object-fit: contain;
+  }
+}
+
+/* ==========================================
+   CODING — TABLET OPTIMIZATION
+   480px–768px
+   ========================================== */
+
+@media (min-width: 480px) and (max-width: 768px) {
+  /* Keep Featured Demos compact */
+  section[aria-labelledby="featured-demos-title"] .card-grid > .card {
+    width: 100%;
+    max-width: 380px;
+    margin-inline: auto;
+  }
+
+  /* Resize CSS, Recipe, and JS overview cards */
+  section[aria-labelledby="exercises-title"] > .container > article.card {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto 1.25rem;
+  }
+
+  /* Remove unnecessary thumbnail padding */
+  section[aria-labelledby="exercises-title"]
+    > .container
+    > article.card
+    > .exercise-thumbnail {
+    padding: 0;
+  }
+
+  /* Preserve complete artwork */
+  section[aria-labelledby="exercises-title"]
+    > .container
+    > article.card
+    > .exercise-thumbnail
+    > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+/* ==========================================
+   CODING — TWO-COLUMN TABLET DEMOS
+   640px–768px
+   ========================================== */
+
+@media (min-width: 640px) and (max-width: 768px) {
+  /* Display both Featured Demos side by side */
+  section[aria-labelledby="featured-demos-title"] .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Let demo cards fill their grid columns */
+  section[aria-labelledby="featured-demos-title"] .card-grid > .card {
+    max-width: none;
+  }
+}
+
+/* ==========================================
+   CODING — RESPONSIVE TABLET CARD LAYOUT
+   640px–992px
+   ========================================== */
+
+@media (min-width: 640px) and (max-width: 992px) {
+  /* Two-column overview layout */
+  section[aria-labelledby="exercises-title"] > .container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+  }
+
+  /* Section heading spans both columns */
+  section[aria-labelledby="exercises-title"] > .container > h2 {
+    grid-column: 1 / -1;
+  }
+
+  /* Overview cards fill their grid columns */
+  section[aria-labelledby="exercises-title"] > .container > article.card {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+  }
+
+  /* Center the JavaScript overview beneath the first two */
+  section[aria-labelledby="exercises-title"]
+    > .container
+    > article.card:nth-of-type(3) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc((100% - 1rem) / 2);
+  }
+
+  /* Expanded exercise grids span both columns */
+  #css-exercises,
+  #js-exercises {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  /* Keep individual exercise thumbnails proportional */
+  #css-exercises .exercise-card .exercise-thumbnail-image,
+  #js-exercises .exercise-card .exercise-thumbnail-image {
+    width: 100% !important;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  /* Keep overview cards together when exercises expand */
+  #css-exercises {
+    order: 1;
+  }
+
+  #js-exercises {
+    order: 2;
+  }
+
+  /* ==========================================
+   CODING — TABLET EXERCISE GALLERY
+   640px–992px
+   ========================================== */
+
+  /* ---------- Gallery Dialog ---------- */
+
+  #exercise-gallery-dialog {
+    box-sizing: border-box;
+    width: 92%;
+    max-width: 840px;
+    max-height: 85vh;
+
+    margin: auto;
+    padding: 0;
+
+    background: #0f1729;
+    color: #ffffff;
+
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 16px;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+
+    overflow: hidden;
+  }
+
+  /* Display gallery only when opened */
+
+  #exercise-gallery-dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---------- Dark Background Overlay ---------- */
+
+  #exercise-gallery-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  /* ---------- Gallery Header ---------- */
+
+  .exercise-gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+
+    background: #0f1116;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+  }
+
+  .exercise-gallery-header h2 {
+    margin: 0;
+
+    color: #d4af37;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.25rem;
+  }
+
+  /* ---------- Close Button ---------- */
+
+  .exercise-gallery-close {
+    padding: 0.65rem 1rem;
+
+    background: transparent;
+    color: #d4af37;
+
+    border: 1px solid #d4af37;
+    border-radius: 8px;
+
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+
+    cursor: pointer;
+  }
+
+  .exercise-gallery-close:hover {
+    background: #d4af37;
+    color: #0f1116;
+  }
+
+  .exercise-gallery-close:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 3px;
+  }
+
+  /* ---------- Scrollable Gallery Content ---------- */
+
+  #exercise-gallery-content {
+    min-height: 0;
+    padding: 1rem;
+
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  /* ---------- Exercise Grid ---------- */
+
+  #exercise-gallery-content > .card-grid {
+    display: grid !important;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+
+    width: 100%;
+  }
+
+  /* ---------- Individual Exercise Cards ---------- */
+
+  #exercise-gallery-content .exercise-card {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+
+    padding-top: 0;
+  }
+
+  /* ---------- Thumbnail Images ---------- */
+
+  #exercise-gallery-content .exercise-thumbnail-image {
+    display: block;
+
+    width: 100% !important;
+    max-width: 100%;
+
+    object-fit: contain;
+    margin: 0;
+  }
+
+  /* ---------- Exercise Information ---------- */
+
+  #exercise-gallery-content .card-body {
+    padding: 0.75rem;
+  }
+}
+
+/* ==========================================
+   CODING — WIDE DESKTOP & 4K OPTIMIZATION
+   1600px and above
+   ========================================== */
+
+@media (min-width: 1600px) {
+  /* ------------------------------------------
+     1. Wider Coding Page Containers
+     ------------------------------------------ */
+
+  body.coding-page main .container {
+    width: 92%;
+    max-width: 1920px;
+  }
+
+  /* ------------------------------------------
+     2. Featured Demos — Two Columns
+     ------------------------------------------ */
+
+  body.coding-page section[aria-labelledby="featured-demos-title"] .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 460px));
+    justify-content: center;
+    justify-items: center;
+    gap: 2rem;
+  }
+
+  /* Prevent Featured Demo thumbnails
+     from becoming excessively large */
+
+  body.coding-page
+    section[aria-labelledby="featured-demos-title"]
+    .card-grid
+    > .card {
+    width: 100%;
+    max-width: 460px;
+    min-width: 0;
+  }
+
+  /* ------------------------------------------
+     3. Exercises — Three Overview Columns
+     ------------------------------------------ */
+
+  body.coding-page section[aria-labelledby="exercises-title"] > .container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 400px));
+    justify-content: center;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  /* ------------------------------------------
+     4. Keep Section Heading Full Width
+     ------------------------------------------ */
+
+  body.coding-page
+    section[aria-labelledby="exercises-title"]
+    > .container
+    > h2 {
+    grid-column: 1 / -1;
+  }
+
+  /* ------------------------------------------
+     5. Control Overview Card Dimensions
+     ------------------------------------------ */
+
+  body.coding-page
+    section[aria-labelledby="exercises-title"]
+    > .container
+    > article.card {
+    width: 100%;
+    max-width: 400px;
+    min-width: 0;
+    justify-self: center;
+  }
+
+  /* ------------------------------------------
+     6. Preserve Expanded Exercise Layout
+     ------------------------------------------ */
+
+  body.coding-page #css-exercises,
+  body.coding-page #js-exercises {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  /* ------------------------------------------
+     7. Control Individual Exercise Card Width
+     ------------------------------------------ */
+
+  body.coding-page #css-exercises > .exercise-card,
+  body.coding-page #js-exercises > .exercise-card {
+    width: 100%;
+    max-width: 400px;
+    justify-self: center;
+  }
+}
+
+/* ==========================================
+   SHARED DESKTOP HEADER
+   1201px and above
+   ========================================== */
+
+@media (min-width: 1201px) {
+  .site-header .container.header-row {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr) max-content;
+    align-items: center;
+    gap: clamp(1rem, 1.5vw, 2rem);
+
+    width: 94%;
+    max-width: 1600px;
+  }
+
+  .site-header .brand-tag {
+    display: block;
+    white-space: nowrap;
+    text-align: center;
+  }
+}
+
+/* ==========================================
+   SHARED LARGE-SCREEN HEADER
+   1600px and above
+   ========================================== */
+
+@media (min-width: 1600px) {
+  .site-header .container.header-row {
+    width: 92%;
+    max-width: 1920px;
+  }
+}
+/* ==========================================
+   CODING — RESPONSIVE CERTIFICATION BADGES
+   Up to 768px
+   ========================================== */
+
+@media (max-width: 768px) {
+  /* Keep Cisco badge images compact */
+  body.coding-page section[aria-labelledby="certs-title"] .card-body img {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto 0.75rem;
+  }
+}
+
+/* ==========================================
+   CODING — TABLET CERTIFICATION GRID
+   640px–768px
+   ========================================== */
+
+@media (min-width: 640px) and (max-width: 768px) {
+  /* Display certification cards side by side */
+  body.coding-page section[aria-labelledby="certs-title"] .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  /* Prevent cards from exceeding their columns */
+  body.coding-page section[aria-labelledby="certs-title"] .card-grid > .card {
+    min-width: 0;
+  }
+}
+
+/* ==========================================
+   CODING — DESKTOP EXERCISE GRID FIX
+   993px–1599px
+   ========================================== */
+
+@media (min-width: 993px) and (max-width: 1599px) {
+  /* Keep expanded exercises in three equal columns */
+  body.coding-page #css-exercises,
+  body.coding-page #js-exercises {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Prevent exercise cards from widening their grid tracks */
+  body.coding-page #css-exercises > .exercise-card,
+  body.coding-page #js-exercises > .exercise-card {
+    min-width: 0;
+  }
+
+  /* Keep thumbnails within their cards */
+  body.coding-page #css-exercises .exercise-thumbnail-image,
+  body.coding-page #js-exercises .exercise-thumbnail-image {
+    width: 100% !important;
+    max-width: 320px;
+    height: auto;
   }
 }
